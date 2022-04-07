@@ -1,0 +1,15 @@
+n = int(input())
+list1 = [int(v) for v in input().split()]
+assert n == len(list1)
+
+m = int(input())
+list2 = [int(b) for b in input().split()]
+assert m == len(list2)
+
+butt = []
+
+for i in list1:
+        if i not in list2:
+            butt.append(i)
+print(len(butt))
+print(*butt)
