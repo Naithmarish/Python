@@ -1,0 +1,10 @@
+from math import sqrt
+n = int(input())
+assert 1 < n < 2147000000
+x = int(sqrt(n)) + 1
+for i in range(2, x):
+    if n % i == 0:
+        print("{:.0f}".format(n // i))
+        break
+else:
+    print('1')
