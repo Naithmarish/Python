@@ -1,0 +1,28 @@
+def frm10to(a):
+    s = ''
+    a = int(a)
+    while a > 0:
+        m = a % b
+        if m < 10:
+            s = str(m) + s
+        else:
+            s = chr(ord('A') + m - 10) + s
+        a //= b
+    return(s)
+
+if __name__ == '__main__':
+    x = input()
+    l = []
+    for b in range(2, 37):
+        sol = frm10to(x)
+        if sol == sol[::-1]:
+            l.append(b)
+        else:
+            pass
+    if len(l) == 1:
+        print('unique', *l, sep="\n")
+    elif len(l) == 0:
+        print('none')
+    else:
+        print('multiple')
+        print(*l)
