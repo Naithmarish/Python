@@ -25,7 +25,9 @@ if __name__ == '__main__':
     frm, to = (int(h) for h in input().split())
     num = input()
     alpha = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-
+    
+    if num == '0':
+        print('0')
     if frm == 10:
         print(frm10to(num))
     elif to == 10:
