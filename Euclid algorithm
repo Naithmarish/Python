@@ -1,0 +1,25 @@
+def gcd(a, b, c, d):
+    while b:
+        if a == c and b == d:
+            return True
+        if b > a:
+            a, b = b, a
+        a = a - b
+        if b > 0:
+            nSub = a // b
+            oldA = a
+            a -= nSub * b
+            newA = a
+            if (b == d and newA <= c and c <= oldA and (oldA - c) % b == 0):
+                return True
+    return False
+
+if __name__ == '__main__':
+    n = int(input())
+    for _ in range(n):
+        a, b = [int(h) for h in input().split()]
+        c, d = [int(k) for k in input().split()]
+        if gcd(a, b, c, d):
+            print('YES')
+        else:
+            print('NO')
