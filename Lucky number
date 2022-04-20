@@ -1,0 +1,23 @@
+def sumint(a):
+    a = int(a)
+    sum = 0
+    while a:
+        digit = a % 10
+        sum += digit
+        a //= 10
+    return(sum)
+
+def floatint(a):
+    b = round(a % 1, 6)
+    b = str(b)
+    b = b.replace('0''.', "", 1)
+    b = list(b)
+    b = map(int, b)
+    return (sum(b))
+
+if __name__ == '__main__':
+    a = abs(float(input()))
+    if sumint(a) == floatint(a):
+        print('Yes')
+    else:
+        print('No')
