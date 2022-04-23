@@ -1,0 +1,16 @@
+l =[]
+def frm10_rev(a):
+
+    if (a == 0):
+        return l
+    m = a % 2
+    l.append(m)
+    frm10_rev(a // 2)
+
+a = int(input())
+frm10_rev(a)
+l.reverse()
+s = "".join(map(str, l))
+s = s.replace('1', 'SX')
+s = s.replace('0', 'S')
+print(s[2::])
