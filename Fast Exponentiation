@@ -1,16 +1,11 @@
-l =[]
-def frm10_rev(a):
+def fff(a, s=''):
+    if a != 0:
+        s += fff(a // 2, s) + str(a % 2)
+    return s
 
-    if (a == 0):
-        return l
-    m = a % 2
-    l.append(m)
-    frm10_rev(a // 2)
-
-a = int(input())
-frm10_rev(a)
-l.reverse()
-s = "".join(map(str, l))
-s = s.replace('1', 'SX')
-s = s.replace('0', 'S')
-print(s[2::])
+if __name__ == '__main__':
+    a = int(input())
+    s = fff(a)
+    s = s.replace('1', 'SX')
+    s = s.replace('0', 'S')
+    print(s[2::])
