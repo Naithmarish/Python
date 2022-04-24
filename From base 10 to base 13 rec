@@ -1,17 +1,12 @@
-l =[]
-def frm10_rev(a):
+def frm10_rev(a, s=''):
+    if a != 0:
+        m = a % 13
+        if m <= 9:
+            s = frm10_rev(a // 13, s) + str(m)
+        else:
+            s = frm10_rev(a // 13, s) + str(chr(ord('A') + m - 10))
+    return s
 
-    if (a == 0):
-        return l
-    m = a % 13
-    if m <= 9:
-        l.append(m)
-    else:
-        l.append(chr(ord('A') + m - 10))
-    frm10_rev(a // 13)
-
-a = int(input())
-frm10_rev(a)
-l.reverse()
-s = "".join(map(str, l))
-print(s)
+if __name__ == '__main__':
+    a = int(input())
+    print(frm10_rev(a))
