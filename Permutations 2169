@@ -1,0 +1,15 @@
+def permutations(symbols: list, result: list):
+
+    if len(symbols) == 0:
+        print(*result)
+        return
+
+    for i in range(len(symbols)):
+        sub_symbols = symbols[:i] + symbols[i + 1:]
+        sub_result = result + symbols[i: i + 1]
+        permutations(sub_symbols, sub_result)
+
+
+if __name__ == "__main__":
+    n = int(input())
+    permutations(list(range(1, n + 1)), [])
