@@ -1,0 +1,26 @@
+fibs = {0: 0, 1: 1, 2: 1}
+
+
+def gcd(a, b):
+    while b != 0:
+        r = a % b
+        a = b
+        b = r
+    return a
+
+
+def fib(n):
+    if fibs.get(n) is None:
+        k = n // 2
+        if n % 2 == 1:
+            fibs[n] = (fib(k) ** 2 + fib(k + 1) ** 2) % 10 ** 8
+        else:
+            fibs[n] = (fib(k) * (fib(k - 1) + fib(k + 1))) % 10 ** 8
+    return fibs[n]
+
+
+if __name__ == '__main__':
+    with open("input.txt") as inp:
+        for line in inp:
+            n, m = [int(k) for k in line.split()]
+            print(fib(gcd(n, m)))
