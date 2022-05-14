@@ -1,0 +1,13 @@
+def Hanoi(n, start, finish):
+    if n > 0:
+        if (start + finish) == 4:
+            Hanoi(n, start, 2)
+            Hanoi(n, 2, finish)
+        else:
+            Hanoi(n-1, start, 6-start-finish)
+            print(n, start, finish)
+            Hanoi(n-1, 6-start-finish, finish)
+
+if __name__ == "__main__":
+    n = int(input())
+    Hanoi(n, 1, 3)
