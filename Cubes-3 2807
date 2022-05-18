@@ -1,0 +1,13 @@
+z = input()
+cubes = input()
+dct = {}
+
+for cube in cubes:
+    dct[cube] = dct.get(cube, 0) + 1
+
+for cube in cubes:
+    if dct[cube] % 2 == 1:
+        print(cube)
+        break
+else:
+    print('Ok')
