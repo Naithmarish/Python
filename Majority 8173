@@ -1,9 +1,9 @@
 n = int(input())
 list = []
 dct = {}
-for i in range(n):
+for _ in range(n):
     m = int(input())
-    for j in range(m):
+    for __ in range(m):
         l = int(input())
         dct[l] = dct.get(l, 0) + 1
     maxn = (max(dct.values()))
