@@ -1,0 +1,7 @@
+n = input()
+lst = [int(k) for k in input().split()]
+dct = {}
+
+for num in lst:
+    dct[num] = dct.get(num, 0) + 1
+print(len(dct))
