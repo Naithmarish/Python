@@ -1,0 +1,38 @@
+n, m = [int(d) for d in input().split()]
+dct = {}
+fin_str = ''
+thrash = ".,:;-'!?"
+count = 0
+count1 = 0
+for _ in range(n):
+    str = input()
+    dct[str] = dct.get(str, 0) + 1
+
+for __ in range(m):
+    new_str = input()
+    new_str = new_str.lower()
+    for char in new_str:
+        if char in thrash:
+            new_str = new_str.replace(char, " ")
+    new_str = new_str.replace('"', ' ')
+    new_str = new_str.strip()
+    fin_str += new_str + " "
+
+fin_str = fin_str.split()
+
+for word in fin_str:
+    if word in dct:
+        pass
+    else: count += 1
+for word1 in dct:
+    if word1 in fin_str:
+        pass
+    else: count1 += 1
+
+
+if count ==0 and count1 == 0:
+    print('Everything is going to be OK.')
+elif count > 0:
+    print('Some words from the text are unknown.')
+elif count == 0 and count1 > 0:
+    print('The usage of the vocabulary is not perfect.')
