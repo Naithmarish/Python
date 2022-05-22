@@ -1,0 +1,18 @@
+dct = {}
+
+while True:
+    try:
+        text = input().lower()
+        for char in text:
+            if char.isalpha():
+                pass
+            else:
+                text = text.replace(char, " ")
+        text = text.split()
+
+        for word in text:
+            dct[word] = dct.get(word, "") + ""
+    except EOFError:
+        break
+
+print(*sorted(dct), sep='\n')
