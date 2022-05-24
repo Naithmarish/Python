@@ -1,0 +1,18 @@
+word = input()
+dct = {}
+count = 0
+
+for _ in range (int(input())):
+    for char in word:
+        dct[char] = dct.get(char, 0) + 1
+    check = input()
+    for ch in check:
+        if ch in dct:
+            dct[ch] -= 1
+            if dct[ch] == 0:
+                del dct[ch]
+        else: break
+    else: count += 1
+    dct.clear()
+
+print(count)
