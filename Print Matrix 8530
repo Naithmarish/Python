@@ -1,0 +1,8 @@
+n = int(input())
+matrix = [list(map(int, input().split())) for i in range(n)]
+r, c = [int(_) for _ in input().split()]
+
+for i in range(r):
+    for j in range(c):
+        print(matrix[i][j], end=" ")
+    print()
