@@ -1,0 +1,12 @@
+def matrix_diag(n, a):
+    d1 = []
+    d2 = []
+    for i in range(n):
+        d1.append(a[i][i])
+        d2.append(a[n-i-1][i])
+    return sum(d1), sum(d2)
+
+if __name__ == '__main__':
+    n = int(input())
+    matrix = [list(map(int, input().split())) for i in range(n)]
+    print(*matrix_diag(n, matrix))
