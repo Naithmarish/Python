@@ -1,0 +1,11 @@
+n, m = [int(_) for _ in input().split()]
+tickets = [list(map(int, input().split())) for _ in range(n)]
+space = input()
+sold = [list(map(int, input().split())) for __ in range(n)]
+ans = []
+
+for y in range(n):
+    for x in range(m):
+        if sold[y][x] == 1:
+            ans.append(tickets[y][x])
+print(sum(ans))
