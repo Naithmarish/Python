@@ -1,0 +1,74 @@
+#Дан текстовый файл. Группы символов, которые разделены пробелами (одним или несколькими) и не содержат пробелов внутри, будем называть словами. Составить подпрограммы для:
+#a) обнаружение самого длинного слова в файле;
+#b) определение количества слов в файле;
+#c) извлечение из файла лишних пробелов и всех слов, состоящих из одной буквы;
+#d) извлечение всех пропусков в начале строк, в конце строк и между словами (кроме одной);
+#e) вставки пропусков в строки равномерно между словами так, чтобы длина всех строк (если в них больше 1 слова) была 80 символов и количество пропусков между словами в одной строке отличалось не более чем на 1 (считать, что строки файла имеют не больше , чем 80 символов)
+#Итог записать в файл H.
+
+def lw(text):
+    longest = ''
+    for char in text:
+        if char.isalpha():
+            pass
+        else:
+            text = text. replace(char, " ")
+    for word in text.split():
+        if len(word) > len(longest):
+            longest = word
+    return longest
+
+def amount(text):
+    for char in text:
+        if char.isalpha():
+            pass
+        else:
+            text = text. replace(char, " ")
+    return len(text.split())
+
+def cleaning(text):
+    for char in text:
+        if char.isalpha():
+            pass
+        else:
+            text = text. replace(char, " ")
+    text = text.split()
+    for word in text:
+        if len(word) < 2:
+            text.remove(word)
+    text = ' '.join(text)
+    return text
+
+def cleaning2(text):
+    text = text.split()
+    text = ' '.join(text)
+    return text
+
+def cleaning3(text, maxlen):
+    text1 = ''
+    count = 0
+    text = text.split()
+    text = ' '.join(text)
+    for word in text.split():
+        count += len(word)
+        if count >= maxlen:
+            text1 += '\n'
+            count = len(word)
+        elif text1 != '':
+            text1 += ' '
+            count += 1
+        text1 += word
+    return text1
+
+
+if __name__ == '__main__':
+    maxlen = 80
+    text = open('butt.txt', 'r')
+    with open("H.txt", "w") as H_file:
+        print(lw(text), file=H_file)
+        print(amount(text), file=H_file)
+        print(cleaning(text), file=H_file)
+        print(cleaning2(text), file=H_file)
+        print(cleaning3(text, maxlen), file=H_file)
+    text.close()
+    H_file.close()
