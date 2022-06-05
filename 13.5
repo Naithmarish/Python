@@ -1,0 +1,51 @@
+#Дан текстовый файл, компоненты которого являются целыми числами. Составить подпрограммы для вычисления:
+#a) количества четных чисел среди компонент;
+#b) количества квадратов нечетных чисел среди компонент;
+#c) разницы между наибольшим четным и наименьшим нечетным числами из компонент;
+#d) количества компонент в самой длинной растущей последовательности компонент файла.
+
+def evens(lst):
+    count = 0
+    for num in lst:
+        if num % 2 == 0:
+            count += 1
+    return count
+
+def oddsqrt(lst):
+    from math import sqrt
+    count = 0
+    for num in lst:
+        if sqrt(num) % 2 == 1:
+            count += 1
+    return count
+
+def evenminusodd(lst):
+    even = []
+    odd = []
+    for num in lst:
+        if num % 2 == 0:
+            even.append(num)
+        else:
+            odd.append(num)
+    return max(even) - min(odd)
+
+def LIS(lst):
+    temp = 1
+    count = 0
+    for i in range(len(lst)-1):
+        if lst[i] < lst[i+1]:
+            temp += 1
+        else:
+            if temp > count:
+                count = temp
+                temp = 1
+            else:
+                temp = 1
+    return count
+
+if __name__ == '__main__':
+    with open(input.txt) as lst:
+        print(evens(lst))
+        print(oddsqrt(lst))
+        print(evenminusodd(lst))
+        print(LIS(lst))
