@@ -1,0 +1,18 @@
+#Описать подпрограмму, которая по заданной последовательности символов формирует текстовый файл со строками по 40 букв (в последней строке букв может быть меньше).
+def splitt(text, maxlen):
+    text1 = ''
+    count = 0
+    for char in text:
+        count += 1
+        if count >= maxlen:
+            text1 += '\n'
+            count = 0
+        text1 += char
+    return text1
+
+if __name__ == '__main__':
+    text = input()
+    maxlen = int(input())
+    with open("butt.txt", "w") as butt_file:
+        print(splitt(text, maxlen), file=butt_file)
+    butt_file.close()
