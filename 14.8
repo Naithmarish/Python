@@ -1,0 +1,31 @@
+#Папка с программой содержит набор текстовых файлов, каждый из которых содержит набор действительных чисел. Кроме этого, в этой же папке содержится файл content.txt, содержащий список имен файлов.
+Реализуйте программу, которая:
+• суммирует данные из файлов, указанных в файле content.txt;
+• корректно обрабатывает ситуацию, если файл content.txt не существует по указанному местоположению или не доступен для чтения и выводит на экран соответствующее сообщение;
+• корректно обрабатывает ситуацию, если файл из перечня указанного в файле content.txt не существует по указанному местоположению или не доступен для чтения;
+• корректно обрабатывает ситуацию, если файл из перечня указанного в файле content.txt содержит не только действительные числа.
+
+def sumfile(file):
+    try:
+        f = open(file, "r")
+        numbers = f.read().split()
+        numbers = [int(_) for _ in numbers]
+        return print(sum(numbers))
+    except FileNotFoundError:
+        print('File not found')
+    except ValueError:
+        print('Incorrect input')
+
+
+if __name__ == '__main__':
+    try:
+        with open ("content.txt", "r") as filelist:
+            allnames = []
+            line = filelist.readline().split()
+            while line:
+                allnames.extend(line)
+                line = filelist.readline().split()
+    except FileNotFoundError:
+        print('File not found bleat')
+    for nam3 in allnames:
+        sumfile(nam3)
