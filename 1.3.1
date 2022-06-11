@@ -1,0 +1,107 @@
+#1.3.1. Опишите классы для следующих геометрических фигур:
+# Треугольник – определяется длинами трех сторон.
+# Прямоугольник – определяется двумя сторонами
+# Трапеция – определяется двумя основаниями и двумя боковыми сторонами.
+# Параллелограмм – определяется двумя сторонами и высотой.
+# Круг – определяется радиусом.
+#В каждом из классов реализуйте операции нахождения периметра (для круга – длины круга) и площади. С помощью этих классов решите следующую задачу:
+#Приведен список фигур вышеприведенных классов. Из заданных фигур найдите фигуру, имеющую наибольшую площадь и периметр.
+#Список фигур хранится в текстовом файле – в каждой отдельной строке файла указывается название фигуры и список параметров, определяющих фигуру в соответствии с указанным выше. Параметры разделены одним или несколькими символами пропуска. Названия фигур указаны следующим образом: Triangle – Треугольник, Rectangle – Прямоугольник, Trapeze – Трапеция, Parallelogram – Параллелограмм, Circle – Круг.
+
+from math import pi
+
+class Triangle:
+    def __init__(self, a, b, c):
+        self.a = a
+        self.b = b
+        self.c = c
+
+    def pmeter(self):
+        return self.a + self.b + self.c
+    def get_area(self):
+        p = (self.a + self.b + self.c) / 2
+        area = (p - self.a) * (p - self.b) * (p - self.c) / 2
+        return area
+
+class Rectangle:
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+
+    def pmeter(self):
+        return 2 * (self.width + self.height)
+    def get_area(self):
+        return self.width * self.height
+
+class Trapeze:
+    def __init__(self, top, bottom, side1, side2):
+        self.top = top
+        self.bottom = bottom
+        self.side1 = side1
+        self.side2 = side2
+
+    def pmeter(self):
+        return self.top + self.bottom + self.side1 + self.side2
+    def get_area(self):
+        return (self.top + self.side1) * 2
+
+class Parallelogram:
+    def __init__(self, a, b, h):
+        self.a = a
+        self.b = b
+        self.h = h
+
+    def pmeter(self):
+        return 2 * (self.a + self.b)
+    def get_area(self):
+        return self.a * self.h
+
+class Circle:
+    def __init__(self, r):
+        self.r = r
+
+    def pmeter(self):
+        return 2 * self.r * pi
+    def get_area(self):
+        return pi * self.r**2
+
+if __name__ == '__main__':
+    dctpm = {'Triangle': 0, 'Rectangle': 0, 'Trapeze': 0, 'Parallelogram': 0, 'Circle': 0}
+    dctar = {'Triangle': 0, 'Rectangle': 0, 'Trapeze': 0, 'Parallelogram': 0, 'Circle': 0}
+    f = open("input1.txt", "r")
+    for line in f:
+        fig, *args = line.split()
+        args = list(map(int, args))
+        if fig == 'Triangle':
+            figure = Triangle(*args)
+            if dctpm.get(fig, 0) < figure.pmeter():
+                dctpm[fig] = figure.pmeter()
+            if dctar.get(fig, 0) < figure.get_area():
+                dctar[fig] = figure.get_area()
+        elif fig == 'Rectangle':
+            figure = Rectangle(*args)
+            if dctpm.get(fig, 0) < figure.pmeter():
+                dctpm[fig] = figure.pmeter()
+            if dctar.get(fig, 0) < figure.get_area():
+                dctar[fig] = figure.get_area()
+        elif fig == 'Trapeze':
+            figure = Trapeze(*args)
+            if dctpm.get(fig, 0) < figure.pmeter():
+                dctpm[fig] = figure.pmeter()
+            if dctar.get(fig, 0) < figure.get_area():
+                dctar[fig] = figure.get_area()
+        elif fig == 'Parallelogram':
+            figure = Parallelogram(*args)
+            if dctpm.get(fig, 0) < figure.pmeter():
+                dctpm[fig] = figure.pmeter()
+            if dctar.get(fig, 0) < figure.get_area():
+                dctar[fig] = figure.get_area()
+        elif fig == 'Circle':
+            figure = Circle(*args)
+            if dctpm.get(fig, 0) < figure.pmeter():
+                dctpm[fig] = figure.pmeter()
+            if dctar.get(fig, 0) < figure.get_area():
+                dctar[fig] = figure.get_area()
+
+    print(max(dctpm, key=dctpm.get), max(dctpm.values()))
+    print(max(dctar, key=dctar.get), max(dctar.values()))
