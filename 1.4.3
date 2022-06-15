@@ -1,0 +1,96 @@
+#Опишите классы
+#a) Гость, содержащий всю необходимую информацию о жилье некоторого отеля: имя, период проживания, количество денег, выделенных на проживание в гостинице и т.д.
+#b) Комната содержит информацию о комнате гостиницы, в том числе стоимость проживания за сутки, ее доступность в определенный период (информацию о том, кем и когда они заняты и т.п.).
+#c) Отель (класс-менеджер) – содержит список комнат этого отеля, является посредником между гостем и комнатой, то есть обеспечивает ему соответствующую комнату, и т.д.
+#Используя вышеприведенные классы, решите задачи:
+#a) О количестве свободных комнат в отеле на указанный момент;
+#b) Поиск свободной комнаты в указанный период;
+#c) поселить жильца на указанный срок;
+#d) стоимости проживания жилья в указанный период;
+#e) прибыли, которую получит отель за указанный период;
+#f) Поиск гостя в отеле (в заданный период);
+
+class Guest:
+    def __init__(self, name, occ, col):
+        self.name = name
+        self.occ = occ
+        self.col = col
+
+    def getname(self):
+        return self.name
+    def getocc(self):
+        return self.occ.values()
+    def getsettle(self):
+        return (self.occ['finish'] - self.occ['start']).days
+        
+class Room:
+    def __init__(self, number, cost, settle):
+        self.number = number
+        self.cost = cost
+        self.settle = settle
+
+    def getnumber(self):
+        return self.number
+    def getcost(self):
+        return self.cost
+    def checkroom(self, Room, rooms):
+        if self.settle is None:
+            return print('Available')
+        else:
+            return print(*rooms[Room.getnumber()])
+    def roomcost(self, start, finish):
+        return (finish - start).days * self.cost
+        
+class Hotel:
+    def __init__(self, rooms, guests):
+        self.rooms = rooms
+        self.guests = guests
+
+    def addguest(self, rooms, Room, Guest):
+        rooms[Room.getnumber()] = Guest.getname(), *Guest.getocc(), Room.getcost()
+        Room.settle = Guest.getsettle()
+    def removeguest(self, rooms, Room):
+        rooms[Room.getnumber()] = None
+        Room.settle = None
+    def getrooms(self):
+        return self.rooms
+    def amount(self, rooms):
+        count = 0
+        for rm in rooms:
+            if rooms[rm] is None:
+                count += 1
+        return count
+    def freerooms(self, rooms):
+        return dict(filter(lambda item: item[1] is None, rooms.items()))
+
+    def income(self, beg, end):
+        inc = 0
+        for room in self.rooms:
+            if self.rooms[room] is None:
+                pass
+            else:
+                if beg > self.rooms[room][2] or self.rooms[room][1] > end:
+                    pass
+                if self.rooms[room][1] <= beg:
+                    st = beg
+                else:
+                    st = self.rooms[room][1]
+                if self.rooms[room][2] >= end:
+                    fin = end
+                else:
+                    fin = self.rooms[room][2]
+                cf = (fin - st).days
+                money = cf * self.rooms[room][3]
+                inc += money
+        return inc
+    def searchman(self, name, beg, end):
+        ans = []
+        for room in self.rooms:
+            if self.rooms[room] is None:
+                pass
+            else:
+                if name == self.rooms[room][0] and beg <= self.rooms[room][2] and self.rooms[room][1] <= end:
+                    ans.append(room)
+                    ans.append(self.rooms[room][1])
+                    ans.append(self.rooms[room][2])
+        return ans
