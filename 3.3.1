@@ -1,0 +1,224 @@
+class Figure:
+    def dimension(self):
+        return None
+    def perimetr(self):
+        return None
+    def square(self):
+        return None
+    def squareSurface(self):
+        return None
+    def squareBase(self):
+        return None
+    def height(self):
+        return None
+    def volume(self):
+        return None
+
+class Triangle(Figure):
+    def __init__(self, a, b, c):
+        self.a = a
+        self.b = b
+        self.c = c
+
+    def dimension(self):
+        return print('2d')
+    def perimetr(self):
+        return self.a + self.b + self.c
+    def square(self):
+        p = (self.a + self.b + self.c) / 2
+        area = (p * (p - self.a) * (p - self.b) * (p - self.c))/3
+        return area
+    def volume(self):
+        return self.square()
+
+class Rectangle(Figure):
+    def __init__(self, a, b):
+        self.a = a
+        self.b = b
+
+    def dimension(self):
+        return print('2d')
+    def perimetr(self):
+        return 2 * (self.a + self.b)
+    def square(self):
+        return self.a * self.b
+    def volume(self):
+        return self.square()
+
+class Trapeze(Figure):
+    def __init__(self, a, b, c, d):
+        self.a = a
+        self.b = b
+        self.c = c
+        self.d = d
+
+    def dimension(self):
+        return print('2d')
+    def perimetr(self):
+        return self.a + self.b + self.c + self.d
+    def square(self):
+        return ((self.a + self.b)/2) * ((self.c + self.d)/2)
+    def volume(self):
+        return self.square()
+
+class Parallelogram(Figure):
+    def __init__(self, a, b, h):
+        self.a = a
+        self.b = b
+        self.h = h
+
+    def dimension(self):
+        return print('2d')
+    def perimetr(self):
+        return 2 * (self.a + self.b)
+    def square(self):
+        return self.a * self.b
+    def volume(self):
+        return self.square()
+
+class Circle(Figure):
+    def __init__(self, r):
+        self.r = r
+
+    def dimension(self):
+        return print('2d')
+    def perimetr(self):
+            return 2 * self.r * 3
+    def square(self):
+            return 3 * self.r ** 2
+    def volume(self):
+        return self.square()
+
+class Ball(Figure):
+    def __init__(self, r):
+        self.r = r
+
+    def dimension(self):
+        return print('3d')
+    def squareSurface(self):
+        return 12 * self.r
+    def squareBase(self):
+        return self.squareSurface()
+    def height(self):
+        return 2 * self.r
+    def volume(self):
+        return 3 * self.r**3
+
+class TriangularPyramid(Triangle):
+    def __init__(self, a, h):
+        super().__init__(a, a, a)
+        self.h = h
+
+    def dimension(self):
+        return print('3d')
+    def perimetr(self):
+        return None
+    def square(self):
+        return None
+    def squareSurface(self):
+        return 3 * self.h * self.a
+    def squareBase(self):
+        return (self.a**2 * 1.5)/4
+    def height(self):
+        return self.h
+    def volume(self):
+        return (self.squareBase() * self.h)/3
+
+class QuadrangularPyramid(Rectangle):
+    def __init__(self, a, b, h):
+        super().__init__(a, b)
+        self.h = h
+
+    def dimension(self):
+        return print('3d')
+    def perimetr(self):
+        return None
+    def square(self):
+        return None
+    def squareSurface(self):
+        return 2 * self.h * self.a
+    def squareBase(self):
+        return self.a * self.b
+    def height(self):
+        return self.h
+    def volume(self):
+        return(self.squareBase() * self.h)/2
+
+class RectangularParallelepiped(Rectangle):
+    def __init__(self, a, b, h):
+        super().__init__(a, b)
+        self.h = h
+    def dimension(self):
+        return print('3d')
+    def perimetr(self):
+        return None
+    def square(self):
+        return None
+    def squareSurface(self):
+        return ((self.a + self.b) / 2) * self.h
+    def squareBase(self):
+        return self.a * self.b
+    def height(self):
+        return self.h
+    def volume(self):
+        return (self.a * self.b * self.h)/3
+
+class Cone(Circle):
+    def __init__(self, r, h):
+        super().__init__(r)
+        self.h = h
+    def dimension(self):
+        return print('3d')
+    def perimetr(self):
+        return None
+    def square(self):
+        return None
+    def squareSurface(self):
+        return self.r * self.h
+    def squareBase(self):
+        return 3 * self.r**2
+    def height(self):
+        return self.h
+    def volume(self):
+        return (self.r * self.h * 3)/2
+
+class TriangularPrism(Triangle):
+    def __init__(self, a, b, c, h):
+        super().__init__(a, b, c)
+        self.h = h
+
+    def dimension(self):
+        return print('3d')
+    def perimetr(self):
+        return None
+    def square(self):
+        return None
+    def squareSurface(self):
+        return ((self.a + self.b + self.c)/3 )*self.h
+    def squareBase(self):
+        p = (self.a + self.b + self.c) / 2
+        area = sqrt(p * (p - self.a) * (p - self.b) * (p - self.c))
+        return area
+    def height(self):
+        return self.h
+    def volume(self):
+        return self.a * self.b * self.c * self.h
+
+if __name__ == '__main__':
+    Figures = {'Triangle':Triangle, 'Rectangle':Rectangle, 'Trapeze':Trapeze, 'Parallelogram':Parallelogram,
+               'Circle':Circle, 'Ball':Ball, 'TriangularPyramid':TriangularPyramid,
+               'QuadrangularPyramid':QuadrangularPyramid, 'RectangularParallelepiped':RectangularParallelepiped,
+               'Cone':Cone, 'TriangularPrism':TriangularPrism}
+    dctvol = {'Triangle':0, 'Rectangle':0, 'Trapeze':0, 'Parallelogram':0,
+               'Circle':0, 'Ball':0, 'TriangularPyramid':0,
+               'QuadrangularPyramid':0, 'RectangularParallelepiped':0,
+               'Cone':0, 'TriangularPrism':0}
+
+    f = open("input1.txt", "r")
+    for line in f:
+        fig, *args = line.split()
+        args = list(map(int, args))
+        figure = Figures[fig](*args)
+        if dctvol.get(fig, 0) < figure.volume():
+            dctvol[fig] = figure.volume()
+    print(max(dctvol, key=dctvol.get), max(dctvol.values()))
