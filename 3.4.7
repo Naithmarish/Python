@@ -1,0 +1,53 @@
+import datetime
+
+class Employee:
+    def __init__(self, name, start, basesalary):
+        self.name = name
+        self.start = start
+        self.basesalary = basesalary
+
+    def getexp(self):
+        return (self.start - datetime.date.today()).days //365
+
+    def calculateSalary(self):
+        return 0
+
+class Mraz(Employee): #Сотрудник отдела кадров
+    def __init__(self, name, start, basesalary):
+        super().__init__(name, start, basesalary)
+
+    def calculateSalary(self):
+        return self.basesalary * (1 + 0.1 * (self.getexp() / 3))
+
+class Developer(Employee): #Программист
+    def __init__(self, name, start, rank, basesalary):
+        super().__init__(name, start, basesalary)
+        self.rank = rank
+
+    def calculateSalary(self):
+        return self.rank * self.basesalary * (1 + self.getexp()/10)
+
+class Tester(Employee): #Тестировщик
+    def __init__(self, name, start, basesalary):
+        super().__init__(name, start, basesalary)
+
+    def calculateSalary(self):
+        return self.basesalary * (1 + self.getexp()/5)
+
+
+if __name__ == '__main__':
+    workers = {'HR':Mraz, 'Developer':Developer, 'Tester':Tester}
+    salaries = 0
+    f = open('input1.txt', 'r')
+    for line in f:
+        try:
+            worker, *args = line.split()
+            args = list(map(int, args))
+            emp = workers[worker](*args)
+            salaries += emp.calculateSalary()
+        except TypeError:
+            pass
+    taxes = salaries * 0.2
+    factsalaries = salaries - taxes
+
+    print(salaries, taxes, factsalaries, sep='\n')
