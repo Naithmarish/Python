@@ -1,0 +1,94 @@
+from abc import ABCMeta, abstractmethod
+
+class teacher(metaclass=ABCMeta):
+    @abstractmethod
+    def teach(self, student):
+        pass
+class building(metaclass=ABCMeta):
+    @abstractmethod
+    def pay(self, student):
+        pass
+class helps(metaclass=ABCMeta):
+    @abstractmethod
+    def obtain(self, student):
+        pass
+
+class student:
+    def __init__(self, type, credits, money):
+        self.type = type
+        self.credits = credits
+        self.money = money
+
+    def learn(self, teacher: teacher):
+        return teacher.teach(self)
+    def pay(self, building: building):
+        return building.pay(self)
+    def obtain(self, help: helps):
+        return help.obtain(self)
+    def check(self):
+        if self.money >= 0 and self.credits <= 0:
+            return print('YES')
+        else:
+            return print('NO')
+    def checktype(self):
+        return print(self.type)
+    def checkcredits(self):
+        return print(self.credits)
+    def checkmoney(self):
+        return print(self.money)
+
+class humanitarian(teacher):
+    def __init__(self, score):
+        self.score = score
+
+    def teach(self, student: student):
+        if student.type == 'natural':
+            pass
+        else:
+            student.credits = student.credits - self.score
+
+class natural(teacher):
+    def __init__(self, score):
+        self.score = score
+
+    def teach(self, student: student):
+        if student.type == 'humanitarian':
+            pass
+        else:
+            student.credits = student.credits - self.score
+
+class canteen(building):
+    def __init__(self, cost):
+        self.cost = cost
+
+    def pay(self, student: student):
+        student.money = student.money - self.cost
+class hostel(building):
+    def __init__(self, cost):
+        self.cost = cost
+    def pay(self, student: student):
+        student.money = student.money - self.cost
+class help(helps):
+    def __init__(self, amount):
+        self.amount = amount
+    def obtain(self, student: student):
+        student.money = student.money + self.amount
+class scholarship(helps):
+    def __init__(self, amount):
+        self.amount = amount
+    def obtain(self, student: student):
+        student.money = student.money + self.amount
+
+if __name__ == '__main__':
+    dct = {'natural': natural, 'humanitarian': humanitarian, 'canteen': canteen, 'hostel': hostel,
+           'help': help, 'scholarship': scholarship}
+    f = open('input02.txt', 'r')
+    lines = f.readlines()
+
+    student = student(lines[0].strip(), int(lines[1]), int(lines[2]))
+
+    for line in lines[3:]:
+        meth, obj, arg = line.split()
+        getattr(dct[obj](int(arg)), meth)(student)
+
+    student.check()
