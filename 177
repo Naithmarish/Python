@@ -1,0 +1,13 @@
+def onlykwargs(func):
+    def only_kwargs(*args, **kwargs):
+        if args:
+            raise AttributeError('butt')
+        return func(*args, **kwargs)
+    return only_kwargs
+
+@onlykwargs
+def rectanglesquare(a, b):
+    return print(a*b)
+
+if __name__ == '__main__':
+    rectanglesquare(a=1, b=8)
