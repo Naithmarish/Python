@@ -1,0 +1,17 @@
+def checktypex(type=int):
+    def checktype(func):
+        def _checktype(*args):
+            for arg in args:
+                if not isinstance(arg, type):
+                    raise TypeError("butt")
+            return func(*args)
+        return _checktype
+    return checktype
+
+@checktypex(type=int)
+def average(*args):
+    return print(int(sum(args)/len(args)))
+
+
+if __name__ == '__main__':
+    average(2, 3, 100, 1488)
