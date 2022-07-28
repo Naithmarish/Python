@@ -1,0 +1,38 @@
+from time import perf_counter
+
+def timecount(func):
+    def _timecount(*args, **kwargs):
+        start = perf_counter()
+        print("Name: {}".format(func.__name__))
+        sol = func(*args, **kwargs)
+        finish = perf_counter()
+        print(finish - start)
+        return sol
+    return _timecount
+
+def timecount_class(cls):
+    for name, attr in cls.__dict__.items():
+        if not name.startswith("__") and callable(attr):
+            setattr(cls, name, timecount(attr))
+    return cls
+
+@timecount_class
+class findsmth:
+
+    def __init__(self):
+        pass
+
+    def multiply(self, a, b):
+        return print(a * b)
+
+    def addsmth(self, a, b):
+        return print(a + b)
+
+    def expsmth(self, a, b):
+        return print(a ** b)
+
+if __name__ == '__main__':
+    cl = findsmth()
+    cl.multiply(1488, 1025)
+    cl.addsmth(100**10, 200**4)
+    cl.expsmth(12, 8)
