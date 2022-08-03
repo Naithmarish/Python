@@ -1,0 +1,5 @@
+import re
+
+thestring = input()
+patt = input()
+print(re.findall("\b"+patt+"\b", thestring, flags=re.MULTILINE))
