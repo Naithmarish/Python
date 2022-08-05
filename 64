@@ -1,0 +1,32 @@
+import re
+
+type1 = r"\b(?P<d1>\d{1,2})\.(?P<m1>\d{1,2})\.(?P<y1>\d{4}\b)"
+type2 = r"\b(?P<m2>\d{1,2})\-(?P<d2>\d{1,2})\-(?P<y2>\d{4}\b)"
+type3 = r"\b(?P<y3>\d{1,4})/(?P<m3>\d{1,2})/(?P<d3>\d{1,2})"
+date = type1 + "|" + type2 + "|" + type3
+
+def changedate(string):
+    def _changedate(match):
+        date = match.group()
+        if "/" in date:
+            k = "1"
+        elif "." in date:
+            k = "2"
+        else:
+            k = "3"
+
+        y = match.group("y" + k)
+        m = match.group("m" + k)
+        d = match.group("d" + k)
+
+        while len(y) != 4:
+            y = "0" + y
+        if len(m) != 2:
+            m = "0" + m
+        if len(d) != 2:
+            d = "0" + d
+
+        date = ".".join((d, m, y))
+        return date
+
+    return re.sub(date, _changedate, string)
