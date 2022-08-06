@@ -1,0 +1,9 @@
+import re
+import datetime
+
+the_string = ""
+pattern = r"(«?)(\d{2}|_{2})\.(\d{2}|_{2})\.(\d{4}|_{4})(»?)"
+today = datetime.datetime.now()
+the_date = today.strftime('%d.%m.%y')
+
+print(re.sub(pattern, the_date, the_string))
